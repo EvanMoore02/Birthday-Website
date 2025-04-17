@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Romantic Envelope</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1589712235273-d8619d2576b4?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .message {
+      font-size: 2rem;
+      color: #ff5e78;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .envelope {
+      position: relative;
+      width: 80%;
+      max-width: 600px;
+      height: 350px;
+      background: #f5e3dc;
+      border: 3px solid #d8a49a;
+      border-radius: 10px;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      transition: transform 1s ease-in-out;
+      overflow: hidden;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: #d8a49a;
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+      transform-origin: top center;
+      opacity: 1;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(-180deg) translateZ(-50px);
+      opacity: 0;
+    }
+
+    .body {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 50%;
+      background: #f5e3dc;
+    }
+
+    .click-text {
+      position: absolute;
+      top: 70%;
+      width: 100%;
+      text-align: center;
+      font-size: 1.5rem;
+      color: #a67c6b;
+      font-weight: bold;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .cake {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: auto;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .envelope.fade-out {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="envelope" id="envelope" onclick="openEnvelope()">
+    <div class="flap"></div>
+    <div class="body"></div>
+    <img class="cake" src="birthday-cake-emoji-1024x1024-rr1geha3.png" alt="Birthday Cake" />
+    <div class="click-text">Click to open the envelope</div>
+  </div>
+
+  <script>
+    function openEnvelope() {
+      const envelope = document.getElementById('envelope');
+      envelope.classList.add('open');
+      setTimeout(() => {
+        window.location.href = 'surprise.html';
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>

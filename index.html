@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Countdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f8ff;
+      color: #333;
+      padding: 50px;
+    }
+    .countdown {
+      font-size: 3em;
+      font-weight: bold;
+      color: #ff6347;
+    }
+    .message {
+      font-size: 1.5em;
+      margin-top: 20px;
+      color: #4682b4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Countdown to MY GIRLFRIEND’S Birthday!</h1>
+  <div id="countdown" class="countdown"></div>
+  <div id="message" class="message"></div>
+
+  <!-- Add Confetti Script -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    var birthday = new Date("April 18, 2025 00:00:00").getTime();
+
+    var x = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = birthday - now;
+
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+
+      // Fireworks when countdown ends
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "🎉 Happy Birthday to the Most Special Girl! 🎂";
+        document.getElementById("message").innerHTML = "🎆 Let the celebration begin (WOOT WOOT)! 🎆";
+
+        // Fire fireworks repeatedly
+        let duration = 4000;
+        let end = Date.now() + duration;
+
+        (function frame() {
+          confetti({
+            particleCount: 5,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+          });
+          confetti({
+            particleCount: 5,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+          });
+
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        })();
+
+        // Redirect after fireworks
+        setTimeout(function () {
+          window.location.href = "envelope.html";
+        }, 10000);
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
